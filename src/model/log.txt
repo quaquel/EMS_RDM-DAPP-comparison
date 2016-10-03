@@ -1,0 +1,5 @@
+generating cases
+full factorial design results in 30 designs
+30 cases generated
+420 experiment will be executed
+starting to perform experiments sequentially

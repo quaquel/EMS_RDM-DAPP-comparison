@@ -1,0 +1,1 @@
+C:\PCRaster\apps\pcrcalc -f C:\workspace\EMAProjects\models\JAN\waas\RAMImiSUI_final.mod -b C:\workspace\EMAProjects\models\JAN\waas\bindings.txt 1 10 1

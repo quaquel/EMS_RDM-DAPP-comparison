@@ -1,0 +1,1793 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{RDM\_analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{k}{def} \PY{n+nf}{save\PYZus{}fig}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{i}\PY{p}{)}\PY{p}{:}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./figs/fig\PYZob{}\PYZcb{}\PYZus{}lowres.png}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{75}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{tight}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{figsi}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./figs/fig\PYZob{}\PYZcb{}\PYZus{}highres.png}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{i}\PY{p}{)}\PY{p}{,} \PY{n}{dpi}\PY{o}{=}\PY{l+m+mi}{300}\PY{p}{,} \PY{n}{bbox\PYZus{}inches}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{tight}\PY{l+s}{\PYZsq{}}\PY{p}{)}   
+         
+         \PY{k}{def} \PY{n+nf}{change\PYZus{}fontsize}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{n}{fs}\PY{o}{=}\PY{l+m+mi}{14}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{for} \PY{n}{ax} \PY{o+ow}{in} \PY{n}{fig}\PY{o}{.}\PY{n}{axes}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{p}{(}\PY{p}{[}\PY{n}{ax}\PY{o}{.}\PY{n}{title}\PY{p}{,} \PY{n}{ax}\PY{o}{.}\PY{n}{xaxis}\PY{o}{.}\PY{n}{label}\PY{p}{,} \PY{n}{ax}\PY{o}{.}\PY{n}{yaxis}\PY{o}{.}\PY{n}{label}\PY{p}{]} \PY{o}{+}
+                               \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}xticklabels}\PY{p}{(}\PY{p}{)} \PY{o}{+} \PY{n}{ax}\PY{o}{.}\PY{n}{get\PYZus{}yticklabels}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{item}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{n}{fs}\PY{p}{)}
+                 
+                 \PY{k}{try}\PY{p}{:}
+                     \PY{n}{parasites} \PY{o}{=} \PY{n}{ax}\PY{o}{.}\PY{n}{parasites}
+                 \PY{k}{except} \PY{n+ne}{AttributeError}\PY{p}{:}
+                     \PY{k}{pass}
+                 \PY{k}{else}\PY{p}{:}
+                     \PY{k}{for} \PY{n}{parisite} \PY{o+ow}{in} \PY{n}{parasites}\PY{p}{:}
+                         \PY{k}{for} \PY{n}{axis} \PY{o+ow}{in} \PY{n}{parisite}\PY{o}{.}\PY{n}{axis}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{axis}\PY{o}{.}\PY{n}{major\PYZus{}ticklabels}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{n}{fs}\PY{p}{)}
+                             \PY{n}{axis}\PY{o}{.}\PY{n}{label}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{n}{fs}\PY{p}{)}
+         
+                     \PY{k}{for} \PY{n}{axis} \PY{o+ow}{in} \PY{n}{ax}\PY{o}{.}\PY{n}{axis}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{axis}\PY{o}{.}\PY{n}{major\PYZus{}ticklabels}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{n}{fs}\PY{p}{)}
+                         \PY{n}{axis}\PY{o}{.}\PY{n}{label}\PY{o}{.}\PY{n}{set\PYZus{}fontsize}\PY{p}{(}\PY{n}{fs}\PY{p}{)}
+             
+             
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}42}]:} \PY{k+kn}{from} \PY{n+nn}{util.util} \PY{k+kn}{import} \PY{n}{load\PYZus{}results}
+         
+         \PY{n}{fn} \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/no policy 5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{results} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{results}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/no policy 5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{k}{with} \PY{n}{sns}\PY{o}{.}\PY{n}{axes\PYZus{}style}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{white}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{oois} \PY{o}{=} \PY{n}{outcomes}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}
+             \PY{n}{oois}\PY{o}{.}\PY{n}{pop}\PY{p}{(}\PY{n}{oois}\PY{o}{.}\PY{n}{index}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             \PY{n}{data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+             \PY{k}{for} \PY{n}{ooi} \PY{o+ow}{in} \PY{n}{oois}\PY{p}{:}
+                 \PY{n}{value} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}
+                 \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{value}\PY{o}{.}\PY{n}{shape}\PY{p}{)}\PY{o}{\PYZgt{}}\PY{l+m+mi}{1}\PY{p}{:}
+                     \PY{n}{value} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{value}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{value} \PY{o}{=} \PY{n}{value}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{value}\PY{p}{)}
+                 \PY{n}{data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{value}\PY{p}{)}
+         
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         
+             \PY{n}{casualties} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{damages} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage} \PY{o}{=} \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+         
+         \PY{n}{change\PYZus{}fontsize}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+         \PY{n}{save\PYZus{}fig}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_2_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{k}{for} \PY{n}{ooi} \PY{o+ow}{in} \PY{n}{oois}\PY{p}{:}
+             \PY{n}{value} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}
+             \PY{n}{value} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{value}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{k}{print} \PY{n}{ooi}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{value}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{value}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of casualties 756.9814067 388.78367684
+Flood damage (Milj. Euro) 34608.543 17107.6871672
+    \end{Verbatim}
+
+    The above figure shows boxplots for both casualties and flood damage. As
+can be seen, without any policy, there are quite a large number of
+casualties as well as a substantial amount of damages. The next question
+is then, under which combination of debelopments do we observe a high
+amount of casualties and or flood damage? To simplify this question,
+first let's take a quick look at the correlation between casuatlies and
+flood damage. If this correlation is high, we might be able to use only
+one or the other in classifying our experiments.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{print} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{casualties}\PY{p}{,} \PY{n}{damages}\PY{p}{)}
+         \PY{k}{print}
+         
+         \PY{c}{\PYZsh{} returns the correlation and the p value}
+         \PY{k}{print} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{pearsonr}\PY{p}{(}\PY{n}{casualties}\PY{p}{,} \PY{n}{damages}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1.          0.80732637]
+ [ 0.80732637  1.        ]]
+
+(0.80732637205751356, 0.0)
+    \end{Verbatim}
+
+    There is a statistically significant correlation between the number of
+casualties and the amount of damage, we can thus simplify the scneario
+discovery by using either the number of casualties or the amount of
+flood damage in the classify function.
+
+\subsection{First iteration scenario
+discovery}\label{first-iteration-scenario-discovery}
+
+We can now perform scenario discovery.
+
+\$ f(x) =
+
+\begin{cases}
+        1 & \text{if } x > 50.000 \\
+        0 & \text{otherwise}
+    \end{cases}
+
+\$\$ \$
+
+where $x$ is the amount of flood damage
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}46}]:} \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{prim}
+         \PY{k+kn}{from} \PY{n+nn}{util} \PY{k+kn}{import} \PY{n}{ema\PYZus{}logging}
+         \PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{log\PYZus{}to\PYZus{}stderr}\PY{p}{(}\PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{INFO}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{classify}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ooi} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}
+             \PY{n}{outcome} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{classes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{classes}\PY{p}{[}\PY{n}{outcome}\PY{o}{\PYZgt{}}\PY{l+m+mi}{50000}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{classes}
+         
+         \PY{n}{prim\PYZus{}obj} \PY{o}{=} \PY{n}{prim}\PY{o}{.}\PY{n}{setup\PYZus{}prim}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{n}{classify}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{0.75}\PY{p}{)}
+         \PY{n}{box\PYZus{}1} \PY{o}{=} \PY{n}{prim\PYZus{}obj}\PY{o}{.}\PY{n}{find\PYZus{}box}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] 5000 points remaining, containing 972 cases of interest
+[INFO] mean: 0.98730964467, mass: 0.0788, coverage: 0.400205761317, density: 0.98730964467 restricted\_dimensions: 3.0
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}47}]:} \PY{k+kn}{import} \PY{n+nn}{mpld3}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{show\PYZus{}ppt}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{show\PYZus{}tradeoff}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mpld3}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}47}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{)}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+m+mi}{24}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.872428
+density     0.904051
+mass        0.187600
+mean        0.904051
+res dim     3.000000
+Name: 24, dtype: float64
+
+                                                               box 24  \textbackslash{}
+                                                                  min   
+climate scenarios                                                  21   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+DamFunctTbl                                               -0.09171426   
+
+                                                                       \textbackslash{}
+                                                                  max   
+climate scenarios                                                  30   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+DamFunctTbl                                                 0.0999638   
+
+                                   
+                        qp values  
+climate scenarios   6.158837e-284  
+land use scenarios  1.427703e-135  
+DamFunctTbl             0.2375261
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{n}{style}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{graph}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Using scenario discovery, we are able to find a single box that contains
+87\% of all the cases of interest, with a density of 90\&. This box thus
+explains with high fidelity the conditions under which the most sever
+economic damages occur. This box is composes of climate scenarios 21-30,
+these are different realizations of the most sever climate change
+scenario, in combination with a growing population as represented by the
+selected land use scenarios. The parameter \texttt{DamFuncTbl} is a
+model specific uncertainy related to the relationship between water
+levels and econmic damages. Given that this paramater is not singificant
+as indicated by the quasi-p value, we drop it from the box for
+interpretation reasons.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{drop\PYZus{}restriction}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{DamFunctTbl}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.907407
+density     0.896341
+mass        0.196800
+mean        0.896341
+res dim     2.000000
+Name: 34, dtype: float64
+
+                                                               box 34  \textbackslash{}
+                                                                  min   
+climate scenarios                                                  21   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+
+                                                                       \textbackslash{}
+                                                                  max   
+climate scenarios                                                  30   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+
+                                   
+                        qp values  
+climate scenarios   3.639663e-291  
+land use scenarios   6.34335e-137
+    \end{Verbatim}
+
+    This changes coverage and density slightly. Coverage increases from 87\%
+to 91\%, while density remains stable. Droping this parameter from the
+box limits thus improved the overall quality of the box.
+
+So, what kind of vulnerability does this box represent? In essence,
+under extreme climate change and growing population, you get a lot of
+problems. This is hardly a surprising result. It also indicates that the
+system in its current state is already in need of additional actions.
+
+    \section{second iteration, 5
+policies}\label{second-iteration-5-policies}
+
+There is a variety of ways in which the identified vulnerability can be
+handeld. These options include heightening the dikes, room for the
+river, strenghtening the dikes by making them wider (so called climate
+dikes), upstream collaboration, and earlier evacuation. These five
+policy options are not identical in their effect. For example, earlier
+evacuation will not change the damages but only reduce casualties. We
+ran 5000 experiments for each of these policy options. For heightening
+the dikes and room for the river, we start with a medium sized option.
+That is, we give some space to the river, or modestly increase the
+height of the dikes. In light of the following analysis, we might
+explore whether a smaller or larger scale version of this policy option
+is in order. Because we now include policy options, we added costs as a
+third indicator.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}51}]:} \PY{k+kn}{from} \PY{n+nn}{util.util} \PY{k+kn}{import} \PY{n}{load\PYZus{}results}
+         
+         \PY{c}{\PYZsh{} load the data and split it by policy}
+         \PY{c}{\PYZsh{} we end up with a dict with policy as key}
+         \PY{c}{\PYZsh{} and the associated experiments and outcomes}
+         \PY{c}{\PYZsh{} as value}
+         \PY{n}{results\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{fn}  \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/6 policies 5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         
+         \PY{n}{policies} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+             \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}
+             
+             \PY{n}{temp\PYZus{}exp} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+             \PY{n}{temp\PYZus{}outcomes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{iteritems}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{temp\PYZus{}outcomes}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{value}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+             \PY{n}{results\PYZus{}dict}\PY{p}{[}\PY{n}{policy}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{temp\PYZus{}exp}\PY{p}{,} \PY{n}{temp\PYZus{}outcomes}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/6 policies 5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}52}]:} \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits.axes\PYZus{}grid1} \PY{k+kn}{import} \PY{n}{host\PYZus{}subplot}
+         \PY{k+kn}{import} \PY{n+nn}{mpl\PYZus{}toolkits.axisartist} \PY{k+kn}{as} \PY{n+nn}{AA}
+         
+         \PY{n}{policies} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{policies}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no policy}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}determine maxima across all policies}
+         \PY{n}{costs} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{costs}\PY{p}{[}\PY{n}{costs}\PY{o}{==}\PY{l+m+mf}{1e31}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{costs}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{max\PYZus{}costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{costs}\PY{p}{)}
+         
+         \PY{n}{casualties} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{casualties}\PY{p}{[}\PY{n}{casualties}\PY{o}{==}\PY{l+m+mf}{1e31}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{casualties} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{casualties}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{max\PYZus{}casualties} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{casualties}\PY{p}{)}
+         
+         \PY{n}{damages} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{damages}\PY{p}{[}\PY{n}{damages}\PY{o}{==}\PY{l+m+mf}{1e31}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{damages} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{damages}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{max\PYZus{}damages} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{damages}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{do\PYZus{}boxplot}\PY{p}{(}\PY{n}{results\PYZus{}dict}\PY{p}{,} \PY{n}{policy}\PY{p}{,} \PY{n}{compare\PYZus{}with}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{no policy}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c}{\PYZsh{} no policy}
+             \PY{n}{outcomes} \PY{o}{=} \PY{n}{results\PYZus{}dict}\PY{p}{[}\PY{n}{compare\PYZus{}with}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{casualties1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties1}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{damages1} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage1} \PY{o}{=} \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage1}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{compare\PYZus{}with}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+                 
+             \PY{c}{\PYZsh{} policy}
+             \PY{n}{outcomes} \PY{o}{=} \PY{n}{results\PYZus{}dict}\PY{p}{[}\PY{n}{policy}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{casualties2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2} \PY{o}{=} \PY{n}{host} \PY{o}{=} \PY{n}{host\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{,} \PY{n}{axes\PYZus{}class}\PY{o}{=}\PY{n}{AA}\PY{o}{.}\PY{n}{Axes}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties2}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{damages2} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage2} \PY{o}{=} \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages2}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{ax\PYZus{}costs} \PY{o}{=} \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{90}
+             
+             \PY{n}{new\PYZus{}fixed\PYZus{}axis} \PY{o}{=} \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{get\PYZus{}grid\PYZus{}helper}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{new\PYZus{}fixed\PYZus{}axis}
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}fixed\PYZus{}axis}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                                                 \PY{n}{axes}\PY{o}{=}\PY{n}{ax\PYZus{}costs}\PY{p}{,}
+                                                 \PY{n}{offset}\PY{o}{=}\PY{p}{(}\PY{n}{offset}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{toggle}\PY{p}{(}\PY{n+nb}{all}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{costs}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{policy}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+             
+             \PY{c}{\PYZsh{} the xaxis for must be set to the same limits}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}casualties}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}casualties}\PY{p}{)}
+             
+             \PY{n}{ax\PYZus{}damage1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}damages}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}damages}\PY{p}{)}
+             
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}costs}\PY{p}{)}
+         
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{75}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{fig}
+         
+         \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+             \PY{k}{with} \PY{n}{sns}\PY{o}{.}\PY{n}{axes\PYZus{}style}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{white}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{fig} \PY{o}{=} \PY{n}{do\PYZus{}boxplot}\PY{p}{(}\PY{n}{results\PYZus{}dict}\PY{p}{,} \PY{n}{policy}\PY{p}{)}
+                 \PY{n}{change\PYZus{}fontsize}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+                 
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_16_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_16_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_16_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    The above figures show a side by side comparison of each of the five
+policy options and doing nothing. As can be seen, raising the dikes is
+by far the most effective option. It substantially reduces both
+casualties and damages. A minor downside is the uncertainty associated
+with the exact costs. This is due to the fact that the dike height is
+based on a design discharge, which is continuously updated during the
+runtime in light of the latest discharge. This is standard practice in
+the Netherlands. The other policy options are substantially less
+effective. Climate dikes are broad enought to avoid breaching, but can
+still be overtopped. They improve the situation slightly, but are not
+very effective because the dikes are still too low. Medium scale room
+for the river results in a minor reduction of casualties and flood
+damage. Upstream collaboration is not effective, because the resulting
+maximum discharge is still heigher than the dikes can handle. Earlier
+alarm reduces casualities substantially, but does not affect the
+damages.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{fn}  \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/6 policies 5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         
+         \PY{n}{policies} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{temp\PYZus{}outcomes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{value} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{value}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{n}{temp\PYZus{}outcomes}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{value}
+         \PY{n}{outcomes} \PY{o}{=} \PY{n}{temp\PYZus{}outcomes}
+             
+         
+         \PY{k}{for} \PY{n}{ooi} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{fraction of scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+                 \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}
+                 
+                 \PY{n}{data} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{policy}\PY{p}{)}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n}{ooi}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.1}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper right}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.25}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{change\PYZus{}fontsize}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+             
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/6 policies 5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_18_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_18_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_18_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{fn}  \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/6 policies 5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         
+         \PY{n}{outcomes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{key}\PY{p}{:}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{value}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)} \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in}
+                     \PY{n}{outcomes}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         
+         \PY{n}{policies} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{RfR Medium Scale}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{logical} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{experiments}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+             \PY{n}{logical}\PY{p}{[}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{True}
+         \PY{n}{logical}\PY{p}{[}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s}{\PYZsq{}}\PY{l+s}{no policy}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{True}
+         
+         \PY{n}{max\PYZus{}casualties} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}\PY{p}{)}
+         \PY{n}{max\PYZus{}damages} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}\PY{p}{)}
+         \PY{n}{max\PYZus{}costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}\PY{p}{)}
+         
+             
+         \PY{k}{with} \PY{n}{sns}\PY{o}{.}\PY{n}{axes\PYZus{}style}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{white}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{policy} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{policies}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}
+         
+                 \PY{c}{\PYZsh{} policy}
+                 \PY{n}{casualties} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}casualties} \PY{o}{=} \PY{n}{host} \PY{o}{=} \PY{n}{host\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{axes\PYZus{}class}\PY{o}{=}\PY{n}{AA}\PY{o}{.}\PY{n}{Axes}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{damages} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}damage} \PY{o}{=} \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{costs} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}costs} \PY{o}{=} \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{90}
+         
+                 \PY{n}{new\PYZus{}fixed\PYZus{}axis} \PY{o}{=} \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{get\PYZus{}grid\PYZus{}helper}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{new\PYZus{}fixed\PYZus{}axis}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}fixed\PYZus{}axis}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                                                     \PY{n}{axes}\PY{o}{=}\PY{n}{ax\PYZus{}costs}\PY{p}{,}
+                                                     \PY{n}{offset}\PY{o}{=}\PY{p}{(}\PY{n}{offset}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{toggle}\PY{p}{(}\PY{n+nb}{all}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{costs}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{policy}\PY{p}{)}
+         
+                 \PY{c}{\PYZsh{} the xaxis for must be set to the same limits}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}casualties}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}damages}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}costs}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{75}\PY{p}{)}
+         
+                 \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{change\PYZus{}fontsize}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+                 \PY{n}{save\PYZus{}fig}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{6\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{chr}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n+nb}{ord}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/6 policies 5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_19_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Second iteration scenario
+discovery}\label{second-iteration-scenario-discovery}
+
+Given that raising the dikes is the most effective solution. we focuss
+on this option in the next iteration of scenario discovery. The aim is
+to understand what the remaining vulnerabilities of this policy are.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{k+kn}{from} \PY{n+nn}{util.util} \PY{k+kn}{import} \PY{n}{load\PYZus{}results}
+         \PY{n}{fn}  \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/6 policies 5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         
+         \PY{n}{policies} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{RfR Medium Scale}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{logical} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{experiments}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+             \PY{n}{logical}\PY{p}{[}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}\PY{p}{]}\PY{o}{=}\PY{n+nb+bp}{True}
+         
+         \PY{n}{outcomes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{key}\PY{p}{:}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{value}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{n}{logical}\PY{p}{]} \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in}
+                     \PY{n}{outcomes}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+         \PY{n}{experiments} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+         \PY{n}{results} \PY{o}{=} \PY{p}{(}\PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/6 policies 5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}56}]:} \PY{n}{casualties} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{damages} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{k}{print} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{casualties}\PY{p}{,} \PY{n}{damages}\PY{p}{)}
+         \PY{k}{print}
+         
+         \PY{c}{\PYZsh{} returns the correlation and the p value}
+         \PY{k}{print} \PY{n}{sp}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{stats}\PY{o}{.}\PY{n}{pearsonr}\PY{p}{(}\PY{n}{casualties}\PY{p}{,} \PY{n}{damages}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[[ 1.          0.82273562]
+ [ 0.82273562  1.        ]]
+
+(0.82273561931990868, 0.0)
+    \end{Verbatim}
+
+    There still exists a statistically significant correlation,
+
+\subsubsection{scenario discovery for
+damages}\label{scenario-discovery-for-damages}
+
+We can now perform scenario discovery.
+
+\$ f(x) =
+
+\begin{cases}
+        1 & \text{if } x > 7.500 \\
+        0 & \text{otherwise}
+    \end{cases}
+
+\$\$ \$
+
+where $x$ is the amount of flood damage
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{prim}
+         \PY{k+kn}{from} \PY{n+nn}{util} \PY{k+kn}{import} \PY{n}{ema\PYZus{}logging}
+         \PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{log\PYZus{}to\PYZus{}stderr}\PY{p}{(}\PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{INFO}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{classify}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ooi} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}
+             \PY{n}{outcome} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}
+             \PY{n}{classes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{classes}\PY{p}{[}\PY{n}{outcome}\PY{o}{\PYZgt{}}\PY{l+m+mi}{10000}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{classes}
+         
+         \PY{n}{results}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{na}\PY{l+s}{\PYZsq{}}
+         
+         \PY{n}{prim\PYZus{}obj} \PY{o}{=} \PY{n}{prim}\PY{o}{.}\PY{n}{setup\PYZus{}prim}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{n}{classify}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{peel\PYZus{}alpha}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{box\PYZus{}1} \PY{o}{=} \PY{n}{prim\PYZus{}obj}\PY{o}{.}\PY{n}{find\PYZus{}box}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] 10000 points remaining, containing 4647 cases of interest
+[INFO] mean: 0.663612565445, mass: 0.0764, coverage: 0.109102646869, density: 0.663612565445 restricted\_dimensions: 7.0
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{show\PYZus{}ppt}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{show\PYZus{}tradeoff}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mpld3}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{l+m+mi}{14}\PY{p}{)}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.478373
+density     0.591538
+mass        0.375800
+mean        0.591538
+res dim     3.000000
+Name: 14, dtype: float64
+
+                                                               box 14  \textbackslash{}
+                                                                  min   
+climate scenarios                                                  11   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+fragility dikes                                           -0.09998227   
+
+                                                                       \textbackslash{}
+                                                                  max   
+climate scenarios                                                  30   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+fragility dikes                                             0.0979795   
+
+                                  
+                       qp values  
+climate scenarios   1.108469e-15  
+land use scenarios  1.289178e-12  
+fragility dikes        0.4948249  
+
+coverage    0.338928
+density     0.609520
+mass        0.258400
+mean        0.609520
+res dim     5.000000
+Name: 20, dtype: float64
+
+                                                               box 20  \textbackslash{}
+                                                                  min   
+climate scenarios                                                  12   
+land use scenarios  set([urbanizationLargeSteady, urbanizationLarg{\ldots}   
+fragility dikes                                           -0.09660298   
+DamFunctTbl                                               -0.09997506   
+ShipTbl3                                                  -0.09851993   
+
+                                                                       \textbackslash{}
+                                                                  max   
+climate scenarios                                                  30   
+land use scenarios  set([urbanizationLargeSteady, urbanizationLarg{\ldots}   
+fragility dikes                                             0.0979795   
+DamFunctTbl                                                0.09768257   
+ShipTbl3                                                   0.09996198   
+
+                                  
+                       qp values  
+climate scenarios   3.013309e-14  
+land use scenarios  6.766745e-10  
+fragility dikes        0.4534329  
+DamFunctTbl            0.5020987  
+ShipTbl3               0.5020987
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+m+mi}{20}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{} let\PYZsq{}s drop the insignificant restrictions}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{drop\PYZus{}restriction}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{fragility dikes}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{drop\PYZus{}restriction}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{DamFunctTbl}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{drop\PYZus{}restriction}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ShipTbl3}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}61}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.354422
+density     0.607749
+mass        0.271000
+mean        0.607749
+res dim     2.000000
+Name: 36, dtype: float64
+
+                                                               box 36  \textbackslash{}
+                                                                  min   
+climate scenarios                                                  12   
+land use scenarios  set([urbanizationLargeSteady, urbanizationLarg{\ldots}   
+
+                                                                       \textbackslash{}
+                                                                  max   
+climate scenarios                                                  30   
+land use scenarios  set([urbanizationLargeSteady, urbanizationLarg{\ldots}   
+
+                                  
+                       qp values  
+climate scenarios   9.315272e-15  
+land use scenarios  3.242482e-10
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{box\PYZus{}2} \PY{o}{=} \PY{n}{prim\PYZus{}obj}\PY{o}{.}\PY{n}{find\PYZus{}box}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] 7290 points remaining, containing 3000 cases of interest
+[INFO] mean: 0.611969111969, mass: 0.0518, coverage: 0.0682160533678, density: 0.611969111969 restricted\_dimensions: 8.0
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{show\PYZus{}tradeoff}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mpld3}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}63}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.279966
+density     0.482209
+mass        0.269800
+mean        0.482209
+res dim     5.000000
+Name: 8, dtype: float64
+
+                                                                box 8  \textbackslash{}
+                                                                  min   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+climate scenarios                                                   2   
+fragility dikes                                           -0.09998227   
+ShipTbl2                                                   -0.0979855   
+DamFunctTbl                                               -0.09811832   
+
+                                                                       \textbackslash{}
+                                                                  max   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+climate scenarios                                                  30   
+fragility dikes                                            0.09804238   
+ShipTbl2                                                   0.09996517   
+DamFunctTbl                                                0.09831242   
+
+                                  
+                       qp values  
+land use scenarios  4.401683e-08  
+climate scenarios    0.004215981  
+fragility dikes        0.4695582  
+ShipTbl2               0.4701255  
+DamFunctTbl            0.4774302  
+
+coverage    0.068216
+density     0.611969
+mass        0.051800
+mean        0.611969
+res dim     8.000000
+Name: 35, dtype: float64
+
+                                               box 35  \textbackslash{}
+                                                  min   
+climate scenarios                                  16   
+land use scenarios  set([urbanizationDeurbanization])   
+ShipTbl2                                  -0.09621301   
+ShipTbl3                                  -0.09999651   
+collaboration                                1.006688   
+fragility dikes                           -0.09744563   
+DamFunctTbl                               -0.09811832   
+ShipTbl1                                  -0.09998611   
+
+                                                                     
+                                                  max     qp values  
+climate scenarios                                  27  2.001806e-06  
+land use scenarios  set([urbanizationDeurbanization])  1.766676e-05  
+ShipTbl2                                   0.09446498     0.4569208  
+ShipTbl3                                   0.09772397     0.4875906  
+collaboration                                 1.59999     0.4954284  
+fragility dikes                            0.09804238     0.4954284  
+DamFunctTbl                                0.09831242     0.5112933  
+ShipTbl1                                   0.09818923     0.5389885
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{drop\PYZus{}restriction}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{DamFunctTbl}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{drop\PYZus{}restriction}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{ShipTbl2}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{drop\PYZus{}restriction}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{fragility dikes}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{box\PYZus{}2}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.290725
+density     0.479759
+mass        0.281600
+mean        0.479759
+res dim     2.000000
+Name: 38, dtype: float64
+
+                                                               box 38  \textbackslash{}
+                                                                  min   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+climate scenarios                                                   2   
+
+                                                                       \textbackslash{}
+                                                                  max   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+climate scenarios                                                  30   
+
+                                  
+                       qp values  
+land use scenarios  5.919319e-08  
+climate scenarios     0.00212535
+    \end{Verbatim}
+
+    \begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  dike raising 1:1000
+\item
+  dike raising 1:500, combined with alarm early
+\item
+  dike raising 1:500, combined with room for the river medium
+\item
+  dike raising 1:500, combined with climate dikes
+\end{itemize}
+
+\section{third iteration, 5 policies}\label{third-iteration-5-policies}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits.axes\PYZus{}grid1} \PY{k+kn}{import} \PY{n}{host\PYZus{}subplot}
+         \PY{k+kn}{import} \PY{n+nn}{mpl\PYZus{}toolkits.axisartist} \PY{k+kn}{as} \PY{n+nn}{AA}
+         \PY{k+kn}{from} \PY{n+nn}{util.util} \PY{k+kn}{import} \PY{n}{load\PYZus{}results}
+         
+         \PY{k}{def} \PY{n+nf}{do\PYZus{}boxplot}\PY{p}{(}\PY{n}{results\PYZus{}dict}\PY{p}{,} \PY{n}{policy}\PY{p}{,} \PY{n}{compare\PYZus{}with}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{no policy}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             
+             \PY{c}{\PYZsh{} no policy}
+             \PY{n}{outcomes} \PY{o}{=} \PY{n}{results\PYZus{}dict}\PY{p}{[}\PY{n}{compare\PYZus{}with}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{casualties1} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{ax\PYZus{}casualties1} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{121}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties1}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{damages1} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{ax\PYZus{}damage1} \PY{o}{=} \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage1}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages1}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage1}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{compare\PYZus{}with}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+                 
+             \PY{c}{\PYZsh{} policy}
+             \PY{n}{outcomes} \PY{o}{=} \PY{n}{results\PYZus{}dict}\PY{p}{[}\PY{n}{policy}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+             \PY{n}{casualties2} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{ax\PYZus{}casualties2} \PY{o}{=} \PY{n}{host} \PY{o}{=} \PY{n}{host\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{122}\PY{p}{,} \PY{n}{axes\PYZus{}class}\PY{o}{=}\PY{n}{AA}\PY{o}{.}\PY{n}{Axes}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties2}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             \PY{n}{damages2} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{ax\PYZus{}damage2} \PY{o}{=} \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages2}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+             
+             \PY{n}{costs} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+             \PY{n}{ax\PYZus{}costs} \PY{o}{=} \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+             \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{80}
+             
+             \PY{n}{new\PYZus{}fixed\PYZus{}axis} \PY{o}{=} \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{get\PYZus{}grid\PYZus{}helper}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{new\PYZus{}fixed\PYZus{}axis}
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}fixed\PYZus{}axis}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                                                 \PY{n}{axes}\PY{o}{=}\PY{n}{ax\PYZus{}costs}\PY{p}{,}
+                                                 \PY{n}{offset}\PY{o}{=}\PY{p}{(}\PY{n}{offset}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{toggle}\PY{p}{(}\PY{n+nb}{all}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{costs}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{policy}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{grid}\PY{p}{(}\PY{n+nb+bp}{True}\PY{p}{)}
+             
+             \PY{c}{\PYZsh{} the xaxis for must be set to the same limits}
+             \PY{n}{ax\PYZus{}casualties1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}casualties}\PY{p}{)}
+             \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}casualties}\PY{p}{)}
+             
+             \PY{n}{ax\PYZus{}damage1}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}damages}\PY{p}{)}
+             \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}damages}\PY{p}{)}
+             
+             \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}costs}\PY{p}{)}
+         
+             
+             \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{5}\PY{p}{)}
+             
+             \PY{k}{return} \PY{n}{fig}
+         
+         \PY{c}{\PYZsh{} load the data and split it by policy}
+         \PY{c}{\PYZsh{} we end up with a dict with policy as key}
+         \PY{c}{\PYZsh{} and the associated experiments and outcomes}
+         \PY{c}{\PYZsh{} as value}
+         \PY{n}{results\PYZus{}dict} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         
+         \PY{n}{fn}  \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/third iteration 7 policies  5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{policy\PYZus{}results} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{policy\PYZus{}results}
+         \PY{n}{policies} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{k}{print} \PY{n}{policies}
+         
+         \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+             \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}
+             
+             \PY{n}{temp\PYZus{}exp} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+             \PY{n}{temp\PYZus{}outcomes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{iteritems}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{temp\PYZus{}outcomes}\PY{p}{[}\PY{n}{key}\PY{p}{]} \PY{o}{=} \PY{n}{value}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+             \PY{n}{results\PYZus{}dict}\PY{p}{[}\PY{n}{policy}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{temp\PYZus{}exp}\PY{p}{,} \PY{n}{temp\PYZus{}outcomes}\PY{p}{)}
+             
+         \PY{n}{policies} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         \PY{n}{policies}\PY{o}{.}\PY{n}{remove}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{no policy}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c}{\PYZsh{}determine maxima across all policies}
+         \PY{n}{costs} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{max\PYZus{}costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{costs}\PY{p}{)}
+         
+         \PY{n}{casualties} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{max\PYZus{}casualties} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{casualties}\PY{p}{)}
+         
+         \PY{n}{damages} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{max\PYZus{}damages} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{damages}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+             \PY{n}{fig} \PY{o}{=} \PY{n}{do\PYZus{}boxplot}\PY{p}{(}\PY{n}{results\PYZus{}dict}\PY{p}{,} 
+                              \PY{n}{policy}\PY{p}{,}
+                              \PY{n}{compare\PYZus{}with}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/third iteration 7 policies  5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+['Dike 1:500 +0.5m, Dike Climate dikes', 'Dike 1:500 +0.5m, RfR Large Scale', 'Dike 1:500 +0.5m, RfR Medium Scale', 'Dike 1:500 +0.5m', 'Dike 1:500 +0.5m, Alarm Early', 'no policy', 'Dike 1:1000']
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_34_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_34_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_34_4.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_34_5.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_34_6.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_34_7.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{n}{fn}  \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/third iteration 7 policies  5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         
+         \PY{n}{policies} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:1000}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m, RfR Large Scale}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m, Dike Climate dikes}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{n}{logical} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{experiments}\PY{o}{.}\PY{n}{shape}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+         \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+             \PY{n}{logical}\PY{p}{[}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{True}
+         \PY{n}{logical}\PY{p}{[}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s}{\PYZsq{}}\PY{l+s}{no policy}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{True}
+         
+         \PY{n}{max\PYZus{}casualties} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}\PY{p}{)}
+         \PY{n}{max\PYZus{}damages} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}\PY{p}{)}
+         \PY{n}{max\PYZus{}costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}\PY{p}{)}
+         
+             
+         \PY{k}{with} \PY{n}{sns}\PY{o}{.}\PY{n}{axes\PYZus{}style}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{white}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{policy} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{policies}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}
+         
+                 \PY{c}{\PYZsh{} policy}
+                 \PY{n}{casualties} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}casualties} \PY{o}{=} \PY{n}{host} \PY{o}{=} \PY{n}{host\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{axes\PYZus{}class}\PY{o}{=}\PY{n}{AA}\PY{o}{.}\PY{n}{Axes}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{damages} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}damage} \PY{o}{=} \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{costs} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}costs} \PY{o}{=} \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{90}
+         
+                 \PY{n}{new\PYZus{}fixed\PYZus{}axis} \PY{o}{=} \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{get\PYZus{}grid\PYZus{}helper}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{new\PYZus{}fixed\PYZus{}axis}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}fixed\PYZus{}axis}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                                                     \PY{n}{axes}\PY{o}{=}\PY{n}{ax\PYZus{}costs}\PY{p}{,}
+                                                     \PY{n}{offset}\PY{o}{=}\PY{p}{(}\PY{n}{offset}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{toggle}\PY{p}{(}\PY{n+nb}{all}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{costs}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{policy}\PY{p}{)}
+         
+                 \PY{c}{\PYZsh{} the xaxis for must be set to the same limits}
+                 \PY{n}{ax\PYZus{}casualties}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}casualties}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}damage}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}damages}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}costs}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{75}\PY{p}{)}
+             
+                 \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{change\PYZus{}fontsize}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+                 \PY{n}{save\PYZus{}fig}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{7\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{chr}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n+nb}{ord}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/third iteration 7 policies  5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_35_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_35_3.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k}{print} \PY{n+nb}{set}\PY{p}{(}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+set(['Dike 1:500 +0.5m, Dike Climate dikes', 'Dike 1:500 +0.5m, RfR Large Scale', 'Dike 1:500 +0.5m, RfR Medium Scale', 'Dike 1:500 +0.5m', 'Dike 1:500 +0.5m, Alarm Early', 'no policy', 'Dike 1:1000'])
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k}{def} \PY{n+nf}{get\PYZus{}results\PYZus{}for\PYZus{}policies}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{n}{policies}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{results}
+             
+             \PY{n}{logical} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{(}\PY{n}{experiments}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{bool}\PY{p}{)}
+             
+             \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+                 \PY{n}{logical}\PY{p}{[}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}\PY{p}{]} \PY{o}{=} \PY{n+nb+bp}{True}
+             
+             \PY{n}{temp\PYZus{}exp} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{n}{logical}\PY{p}{]}
+             \PY{n}{temp\PYZus{}out} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{key}\PY{p}{:} \PY{n}{value}\PY{p}{[}\PY{n}{logical}\PY{p}{]} \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+             
+             \PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{not relevant}\PY{l+s}{\PYZsq{}}
+             \PY{n}{logical} \PY{o}{=} \PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{climate scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{11}
+             \PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{climate scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+             
+             \PY{n}{logical} \PY{o}{=} \PY{p}{(}\PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{climate scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZlt{}}\PY{l+m+mi}{21}\PY{p}{)} \PY{o}{\PYZam{}} \PY{p}{(}\PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{climate scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{10}\PY{p}{)}
+             \PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{climate scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             
+             \PY{n}{logical}  \PY{o}{=} \PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{climate scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{\PYZgt{}}\PY{l+m+mi}{20}
+             \PY{n}{temp\PYZus{}exp}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{climate scenarios}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n}{logical}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{2}
+             
+             \PY{k}{return} \PY{n}{temp\PYZus{}exp}\PY{p}{,} \PY{n}{temp\PYZus{}out}
+         
+         \PY{n}{fn}  \PY{o}{=} \PY{l+s}{r\PYZsq{}}\PY{l+s}{./data/third iteration 7 policies  5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}
+         \PY{n}{results} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{n}{fn}\PY{p}{)}
+         \PY{n}{policies} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m, Dike Climate dikes}\PY{l+s}{\PYZsq{}}\PY{p}{,}  
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:1000}\PY{l+s}{\PYZsq{}}\PY{p}{,}
+                     \PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m, RfR Large Scale}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{relevant\PYZus{}results} \PY{o}{=} \PY{n}{get\PYZus{}results\PYZus{}for\PYZus{}policies}\PY{p}{(}\PY{n}{results}\PY{p}{,} \PY{n}{policies}\PY{p}{)}   
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/third iteration 7 policies  5000 runs.tar.gz
+    \end{Verbatim}
+
+    \subsection{Third iteration prim}\label{third-iteration-prim}
+
+based on the results above, we have selected 3 policies
+
+\begin{itemize}
+\itemsep1pt\parskip0pt\parsep0pt
+\item
+  Dike 1:500 +0.5m, Dike Climate dikes
+\item
+  ike 1:500 +0.5m, Alarm Early'
+\item
+  Dike 1:1000
+\end{itemize}
+
+For some reason the results of dike 1:500 and room for the river are
+off, this needs to be investigated in the next version of this analysis.
+
+\subsubsection{scenario discovery for
+casualties}\label{scenario-discovery-for-casualties}
+
+We can now perform scenario discovery.
+
+\$ f(x) =
+
+\begin{cases}
+        1 & \text{if } x > 300 \\
+        0 & \text{otherwise}
+    \end{cases}
+
+\$\$ \$
+
+where $x$ is the number of casualties
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{prim}
+         \PY{k+kn}{from} \PY{n+nn}{util} \PY{k+kn}{import} \PY{n}{ema\PYZus{}logging}
+         \PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{log\PYZus{}to\PYZus{}stderr}\PY{p}{(}\PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{INFO}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{classify}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ooi} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}
+             \PY{n}{outcome} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}
+             \PY{n}{classes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{classes}\PY{p}{[}\PY{n}{outcome}\PY{o}{\PYZgt{}}\PY{l+m+mi}{250}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{classes}
+         
+         \PY{n}{prim\PYZus{}obj} \PY{o}{=} \PY{n}{prim}\PY{o}{.}\PY{n}{setup\PYZus{}prim}\PY{p}{(}\PY{n}{relevant\PYZus{}results}\PY{p}{,} \PY{n}{classify}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{0.4}\PY{p}{,} \PY{n}{peel\PYZus{}alpha}\PY{o}{=}\PY{l+m+mf}{0.05}\PY{p}{)}
+         \PY{n}{box\PYZus{}1} \PY{o}{=} \PY{n}{prim\PYZus{}obj}\PY{o}{.}\PY{n}{find\PYZus{}box}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] 15000 points remaining, containing 3773 cases of interest
+[INFO] mean: 0.607007575758, mass: 0.0704, coverage: 0.169891333157, density: 0.607007575758 restricted\_dimensions: 6.0
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{k+kn}{import} \PY{n+nn}{mpld3}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{show\PYZus{}tradeoff}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mpld3}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.411344
+density     0.535542
+mass        0.193200
+mean        0.535542
+res dim     2.000000
+Name: 5, dtype: float64
+
+                                                                box 5  \textbackslash{}
+                                                                  min   
+climate scenarios                                                   2   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+
+                                                                       \textbackslash{}
+                                                                  max   
+climate scenarios                                                   2   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+
+                                  
+                       qp values  
+climate scenarios     3.5595e-81  
+land use scenarios  8.225532e-37
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{style}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{graph}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{select}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+         \PY{n}{box\PYZus{}2} \PY{o}{=} \PY{n}{prim\PYZus{}obj}\PY{o}{.}\PY{n}{find\PYZus{}box}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] 12102 points remaining, containing 2221 cases of interest
+[INFO] box does not meet threshold criteria, value is 0.383480825959, returning dump box
+    \end{Verbatim}
+
+    \subsubsection{Scenario discovery for
+damages}\label{scenario-discovery-for-damages}
+
+We can now perform scenario discovery.
+
+\$ f(x) =
+
+\begin{cases}
+        1 & \text{if } x > 5000 \\
+        0 & \text{otherwise}
+    \end{cases}
+
+\$\$ \$
+
+where $x$ is the amount of flood damage
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{k+kn}{from} \PY{n+nn}{analysis} \PY{k+kn}{import} \PY{n}{prim}
+         \PY{k+kn}{from} \PY{n+nn}{util} \PY{k+kn}{import} \PY{n}{ema\PYZus{}logging}
+         \PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{log\PYZus{}to\PYZus{}stderr}\PY{p}{(}\PY{n}{ema\PYZus{}logging}\PY{o}{.}\PY{n}{INFO}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{classify}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{ooi} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}
+             \PY{n}{outcome} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}
+             \PY{n}{classes} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{outcome}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+             \PY{n}{classes}\PY{p}{[}\PY{n}{outcome}\PY{o}{\PYZgt{}}\PY{l+m+mi}{5000}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{1}
+             \PY{k}{return} \PY{n}{classes}
+         
+         
+         \PY{n}{prim\PYZus{}obj} \PY{o}{=} \PY{n}{prim}\PY{o}{.}\PY{n}{setup\PYZus{}prim}\PY{p}{(}\PY{n}{relevant\PYZus{}results}\PY{p}{,} \PY{n}{classify}\PY{p}{,} \PY{n}{threshold}\PY{o}{=}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{peel\PYZus{}alpha}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{,} \PY{n}{mass\PYZus{}min}\PY{o}{=}\PY{l+m+mf}{0.01}\PY{p}{)}
+         \PY{n}{box\PYZus{}1} \PY{o}{=} \PY{n}{prim\PYZus{}obj}\PY{o}{.}\PY{n}{find\PYZus{}box}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] 15000 points remaining, containing 2291 cases of interest
+[INFO] mean: 0.598984771574, mass: 0.0394, coverage: 0.15451767787, density: 0.598984771574 restricted\_dimensions: 7.0
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{k+kn}{import} \PY{n+nn}{mpld3}
+         \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{show\PYZus{}tradeoff}\PY{p}{(}\PY{p}{)}
+         \PY{n}{mpld3}\PY{o}{.}\PY{n}{display}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}76}]:} <IPython.core.display.HTML object>
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{n}{box\PYZus{}1}\PY{o}{.}\PY{n}{inspect}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+coverage    0.580533
+density     0.483988
+mass        0.183200
+mean        0.483988
+res dim     5.000000
+Name: 10, dtype: float64
+
+                                                               box 10  \textbackslash{}
+                                                                  min   
+climate scenarios                                                   2   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+fragility dikes                                           -0.09597666   
+ShipTbl1                                                  -0.09608803   
+collaboration                                                1.007643   
+
+                                                                       \textbackslash{}
+                                                                  max   
+climate scenarios                                                   2   
+land use scenarios  set([urbanizationLargeSteady, urbanizationDeur{\ldots}   
+fragility dikes                                            0.09996334   
+ShipTbl1                                                   0.09997197   
+collaboration                                                1.599963   
+
+                                   
+                        qp values  
+climate scenarios   8.589929e-186  
+land use scenarios   1.539981e-54  
+fragility dikes         0.3891626  
+ShipTbl1                0.3891626  
+collaboration           0.4166299
+    \end{Verbatim}
+
+    It is quite evident that the combination of climate change (W+) and
+strong urbanization is the main driver for poor outcomes. A next step
+would be to make an adaptive policy where we strengthen dikes
+conditional on either a climate signal, or a land use signal, or both.
+Earlier work on the Rhine suggests that one of the best indicators for
+detecting climate change is the running average over 30 years of the
+number of days flows are below 12000 m\^{}3/s.
+
+Using this, we can make an adaptive policy. For demostration purposes,
+we make two adaptive policies * 1:500, followed by 1:1000 in case of
+climate change signal * 1:500 with climate dikes, followed by dike
+strengthening to 1:1000 in case of climate change signal
+
+    \subsection{fourth iteration, adaptive
+policy}\label{fourth-iteration-adaptive-policy}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{k+kn}{from} \PY{n+nn}{util.util} \PY{k+kn}{import} \PY{n}{load\PYZus{}results}
+         
+         \PY{n}{experiments}\PY{p}{,} \PY{n}{outcomes} \PY{o}{=} \PY{n}{load\PYZus{}results}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{./data/fourth iteration 5 policies  5000 runs.tar.gz}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{k}{for} \PY{n}{entry} \PY{o+ow}{in} \PY{n+nb}{set}\PY{p}{(}\PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+             \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{entry}
+             \PY{k}{print} \PY{n}{entry}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{logical}\PY{p}{)}
+             
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[INFO] results loaded succesfully from ./data/fourth iteration 5 policies  5000 runs.tar.gz
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Dike 1:500 +0.5m 5000
+Dike 1:500 +0.5m, 1:1000 5000
+no policy 5000
+Dike 1:500 +0.5m, Dike Climate dikes, 1:1000 5000
+Dike 1:1000 5000
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{k+kn}{from} \PY{n+nn}{mpl\PYZus{}toolkits.axes\PYZus{}grid1} \PY{k+kn}{import} \PY{n}{host\PYZus{}subplot}
+         \PY{k+kn}{import} \PY{n+nn}{mpl\PYZus{}toolkits.axisartist} \PY{k+kn}{as} \PY{n+nn}{AA}
+         
+         \PY{n}{policies} \PY{o}{=} \PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m, 1:1000}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{Dike 1:500 +0.5m, Dike Climate dikes, 1:1000}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         
+         \PY{c}{\PYZsh{}determine maxima across all policies}
+         \PY{n}{costs} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{max\PYZus{}costs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{costs}\PY{p}{)}
+         
+         \PY{n}{casualties} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{max\PYZus{}casualties} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{casualties}\PY{p}{)}
+         
+         \PY{n}{damages} \PY{o}{=} \PY{n}{outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{max\PYZus{}damages} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{damages}\PY{p}{)}
+         
+         \PY{k}{with} \PY{n}{sns}\PY{o}{.}\PY{n}{axes\PYZus{}style}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{white}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{policy} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{policies}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}
+                 \PY{n}{temp\PYZus{}outcomes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{key}\PY{p}{:}\PY{n}{value}\PY{p}{[}\PY{n}{logical}\PY{p}{]} \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+                 \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{c}{\PYZsh{} policy}
+         
+                 \PY{n}{casualties2} \PY{o}{=} \PY{n}{temp\PYZus{}outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Number of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}casualties2} \PY{o}{=} \PY{n}{host} \PY{o}{=} \PY{n}{host\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{,} \PY{n}{axes\PYZus{}class}\PY{o}{=}\PY{n}{AA}\PY{o}{.}\PY{n}{Axes}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{n}{casualties2}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{nr. of casualties}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{damages2} \PY{o}{=} \PY{n}{temp\PYZus{}outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}damage2} \PY{o}{=} \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{n}{damages2}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{Flood damage (Milj. Euro)}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{costs} \PY{o}{=} \PY{n}{temp\PYZus{}outcomes}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{Costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}
+                 \PY{n}{ax\PYZus{}costs} \PY{o}{=} \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{twinx}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{offset} \PY{o}{=} \PY{l+m+mi}{90}
+         
+                 \PY{n}{new\PYZus{}fixed\PYZus{}axis} \PY{o}{=} \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{get\PYZus{}grid\PYZus{}helper}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{new\PYZus{}fixed\PYZus{}axis}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{new\PYZus{}fixed\PYZus{}axis}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{,}
+                                                     \PY{n}{axes}\PY{o}{=}\PY{n}{ax\PYZus{}costs}\PY{p}{,}
+                                                     \PY{n}{offset}\PY{o}{=}\PY{p}{(}\PY{n}{offset}\PY{p}{,} \PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{axis}\PY{p}{[}\PY{l+s}{\PYZdq{}}\PY{l+s}{right}\PY{l+s}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{toggle}\PY{p}{(}\PY{n+nb}{all}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{p}{]}\PY{p}{,}\PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{n}{costs}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}xticklabels}\PY{p}{(}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{casualties}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{flood damage}\PY{l+s}{\PYZsq{}}\PY{p}{,}\PY{l+s}{\PYZsq{}}\PY{l+s}{costs}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}
+                 \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{policy}\PY{p}{)}
+         
+                 \PY{c}{\PYZsh{} the xaxis for must be set to the same limits}
+                 \PY{n}{ax\PYZus{}casualties2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}casualties}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}damage2}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}damages}\PY{p}{)}
+         
+                 \PY{n}{ax\PYZus{}costs}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{n}{ymin}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{ymax}\PY{o}{=}\PY{l+m+mf}{1.2}\PY{o}{*}\PY{n}{max\PYZus{}costs}\PY{p}{)}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{o}{.}\PY{l+m+mi}{75}\PY{p}{)}
+         
+                 \PY{n}{change\PYZus{}fontsize}\PY{p}{(}\PY{n}{fig}\PY{p}{)}
+                 
+                 \PY{n}{save\PYZus{}fig}\PY{p}{(}\PY{n}{fig}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{8\PYZob{}\PYZcb{}}\PY{l+s}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{chr}\PY{p}{(}\PY{n}{i} \PY{o}{+} \PY{n+nb}{ord}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{a}\PY{l+s}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+                 
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_51_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_51_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{k+kn}{from} \PY{n+nn}{analysis.plotting\PYZus{}util} \PY{k+kn}{import} \PY{n}{determine\PYZus{}kde}
+         
+         \PY{k}{for} \PY{n}{ooi} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+         
+             \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{p}{)}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{111}\PY{p}{)}
+             \PY{n}{minima} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}\PY{p}{)}
+             \PY{n}{maxima} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}\PY{p}{)}
+             
+             
+             \PY{k}{for} \PY{n}{policy} \PY{o+ow}{in} \PY{n}{policies}\PY{p}{:}
+                 \PY{n}{logical} \PY{o}{=} \PY{n}{experiments}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{policy}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{n}{policy}
+                 \PY{n}{temp\PYZus{}outcomes} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{key}\PY{p}{:}\PY{n}{value}\PY{p}{[}\PY{n}{logical}\PY{p}{]} \PY{k}{for} \PY{n}{key}\PY{p}{,} \PY{n}{value} \PY{o+ow}{in} \PY{n}{outcomes}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{\PYZcb{}}
+         
+         
+                 \PY{n}{data} \PY{o}{=} \PY{n}{temp\PYZus{}outcomes}\PY{p}{[}\PY{n}{ooi}\PY{p}{]}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{sort}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                 \PY{n}{y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{n+nb}{float}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{n}{policy}\PY{p}{)}
+                 \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n}{ooi}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{upper right}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.4}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+             
+             
+             
+\end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_52_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{RDM_analysis_files/RDM_analysis_52_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
